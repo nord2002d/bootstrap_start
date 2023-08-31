@@ -1,0 +1,53 @@
+
+
+.rightSide {
+    height: 100vh;
+
+}
+
+.rightSide {
+    background: whitesmoke;
+}
+
+.btn-lnk:hover {
+    background: #fff;
+}
+
+.tableColor {
+    background: #fff;
+}
+
+.borderless td, .borderless th {
+    border: none;
+}
+
+.withoutLine {
+    text-decoration: none;
+}
+
+.linkColor {
+    color: gainsboro;
+}
+
+.borderButton {
+    border-top: 1px
+}
+.inputColorForm2 {
+    background-color: #FFD700CA;
+}
+
+.inputColorModForm {
+    background-color: #f8f9fa;
+}
+
+.labelDiv {
+    margin-bottom: 50px;
+}
+.mt {
+    margin-top: -7px;
+}
+
+
+
+
+
