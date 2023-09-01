@@ -1,7 +1,8 @@
-package ru.kata.spring.boot_security.demo.hiber;
+package ru.kata.spring.boot_security.demo.web.configs;
 
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -24,7 +25,7 @@ import java.util.Properties;
 @ComponentScan(value = "ru.kata.spring.boot_security.demo")
 public class AppConfig {
    private Environment env;
-
+   @Autowired
    public AppConfig(Environment env) {
       this.env = env;
    }

@@ -3,6 +3,7 @@ package ru.kata.spring.boot_security.demo.web.dao;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.kata.spring.boot_security.demo.web.model.User;
 
@@ -15,7 +16,7 @@ import java.util.Optional;
 public class UserDaoImpl implements UserDao {
 
     private SessionFactory sessionFactory;
-
+    @Autowired
     public UserDaoImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
@@ -49,8 +50,10 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void removeUser(User user) {
+    public boolean removeUser(User user) {
+        boolean flagRemove = true;
         sessionFactory.getCurrentSession().delete(user);
+        return flagRemove;
     }
 
     @Override

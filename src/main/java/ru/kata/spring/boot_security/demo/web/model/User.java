@@ -19,15 +19,17 @@ public class User implements UserDetails {
     private Long id;
     @NotBlank( message = "не может быть пустым, заполните поле")
     @Size( min = 2, max = 30, message = "не может быть меньше 2 символов и больше 30")
+    @Column(name = "name")
     private String name;
     @NotBlank( message = "не может быть пустым, заполните поле")
     @Size( min = 2, max = 30, message = "не может быть меньше 2 символов и больше 30")
     @Column(name = "sur_name")
     private String surName;
+
     @Min(value = 1, message = "Минимальное значение поля - 1, укажите корректное значение")
     @Max(value = 130, message = "Максимальное значение поля - 130, укажите корректное значение")
-    @NotNull( message = "не может быть пустым, заполните поле")
     @Column(name = "age")
+    @NotNull( message = "не может быть пустым, заполните поле")
     private Integer age;
     @Email
     @NotBlank( message = "Поле не может быть пустым, заполните поле")
@@ -37,6 +39,7 @@ public class User implements UserDetails {
     @Column(name = "password")
     private String password;
 
+    @NotNull(message = "поле не может быть пустым, выберите Роль для пользователя")
     @ElementCollection(targetClass = Role.class,fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id",foreignKey = @javax.persistence.ForeignKey(name = "none")))
     @Enumerated(EnumType.STRING)
@@ -46,7 +49,7 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(String name, String surName, int age, String email, String password, Set<Role> roles) {
+    public User(String name, String surName, Integer age, String email, String password, Set<Role> roles) {
         this.name = name;
         this.surName = surName;
         this.age = age;
@@ -136,6 +139,14 @@ public class User implements UserDetails {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override

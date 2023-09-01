@@ -12,7 +12,10 @@
           crossorigin="anonymous"></script>
   <link type='text/css' rel='stylesheet' href="/assets/css/style.css">
 
+
+
 </head>
+
 
 
 <body>
@@ -113,63 +116,65 @@
 
                 <!-- Модальное окно EDIT - 1 -->
 
-                <div class="modal" th:id="'modalUpdate'+${user.id}" tabindex="-1" aria-labelledby="modalUpdateLabel" aria-hidden="true">
+                <div class="modal" id="modalUpdate" th:id="'modalUpdate'+${user.id}" tabindex="-1" aria-labelledby="modalUpdateLabel" aria-hidden="true">
                   <div class="modal-dialog">
-                    <form th:method="PATCH" name="updateForm" th:action="@{/}" th:object="${user}" data-bs-target="#update-form">
+                    <form th:method="PATCH" id="updateForm" name="updateForm" th:action="@{/}" th:object="${user}" data-bs-target="#update-form">
                     <div class="modal-content">
                       <div class="modal-header">
                         <h5 class="modal-title" id="modalUpdateLabel">Edit User</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
                       <div class="modal-body">
-                          <div class="row ">
+                          <div class="row">
                             <label for="user-id-f1" class="text-center fw-bolder col-form-label">ID</label>
                             <div class="col-6 mx-auto">
-                              <input type="number" name="id" th:value="*{id}" class="form-control form-control-sm text-start mt"  id="user-id-f1">
+                              <input type="number" name="id" th:value="*{id}" class="form-control form-control-sm text-start mt" id="user-id-f1">
                             </div>
                           </div>
                           <div class="row">
-                            <label for="user-name-f1" class="text-center fw-bolder col-form-label  align-bottom">First
+                            <label for="name" class="text-center fw-bolder col-form-label  align-bottom">First
                               Name</label>
                             <div class="col-6 mx-auto">
-                              <input type="text" name="username" th:value="*{username}" class="form-control form-control-sm text-start mt"  id="user-name-f1">
+                              <input type="text" name="name" th:value="*{name}" class="form-control form-control-sm text-start mt" id="name">
                             </div>
                           </div>
                           <div class="row">
-                            <label for="user-lastName-f1" class="text-center fw-bolder col-form-label">Last Name</label>
+                            <label for="surName" class="text-center fw-bolder col-form-label">Last Name</label>
                             <div class="col-6 mx-auto">
-                              <input type="text" name="surName" th:value="*{surName}" class="form-control form-control-sm text-start mt"   id="user-lastName-f1">
+                              <input type="text" name="surName" th:value="*{surName}" class="form-control form-control-sm text-start mt" id="surName">
+
                             </div>
                           </div>
                           <div class="row">
                             <label for="age-f1" class="text-center fw-bolder col-form-label">Age</label>
                             <div class="col-6 mx-auto">
                               <input type="number" name="age" th:value="*{age}" class="form-control form-control-sm text-start mt"  id="age-f1">
+
                             </div>
                           </div>
                           <div class="row">
                             <label for="email-f1"  class="text-center fw-bolder col-form-label">Email</label>
                             <div class="col-6 mx-auto">
                               <input type="email" name="email" th:value="*{email}" class="form-control form-control-sm text-start mt" id="email-f1">
+
                             </div>
                           </div>
                           <div class="row">
-                            <label for="pass-f1"  class="text-center fw-bolder col-form-label">Password</label>
+                            <label for="passNotShow-f1"  class="text-center fw-bolder col-form-label">Password</label>
                             <div class="col-6 mx-auto">
-                              <input style="display: none" name="password" type="password" th:value="*{password}" class="form-control form-control-sm text-start mt" id="passNotShow-f1">
-                              <input type="text" class="form-control form-control-sm text-start mt"   id="pass-f1">
+                              <input  name="password" type="text"  class="form-control form-control-sm text-start mt" id="passNotShow-f1">
                             </div>
                           </div>
                           <div class="row">
                             <label for="role-f1" class="text-center fw-bolder col-form-label">Role</label>
                             <div class="col-6 mx-auto">
-                              <select multiple class="form-select mt" name="roles" th:value="*{roles}" size="2" aria-label="size 2 select example" id="role-f1">
+                              <select multiple class="form-select mt"  name="roles" th:value="*{roles}" size="2" aria-label="size 2 select example" id="role-f1">
                                 <option value="ADMIN">ADMIN</option>
                                 <option value="USER">USER</option>
                               </select>
+
                             </div>
                           </div>
-
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -271,13 +276,13 @@
               </div>
               <!--              Основная часть-->
 
-              <form th:method="POST" name="deleteForm" th:action="@{/}" th:object="${user}">
+              <form th:method="POST" name="addForm" th:action="@{/}">
                   <div class="modal-content">
                     <div class="modal-body" >
                         <div class="row ">
                           <label for="user-n-f1" class="text-center fw-bolder col-form-label">First Name</label>
                           <div class="col-3 mx-auto " >
-                            <input type="text" name="username" class="form-control form-control-sm text-start mt" id="user-n-f1">
+                            <input type="text" name="name" class="form-control form-control-sm text-start mt" id="user-n-f1">
                           </div>
                         </div>
                         <div class="row">
@@ -295,11 +300,13 @@
                           <label for="e-f1"  class="text-center fw-bolder col-form-label">Email</label>
                           <div class="col-3 mx-auto">
                             <input type="email" name="email" class="form-control form-control-sm text-start mt" id="e-f1">
+
                           </div>
 
                           <label for="p-f1" class="text-center fw-bolder col-form-label">Password</label>
                           <div class="col-3 mx-auto">
                             <input type="password" name="password" class="form-control form-control-sm text-start mt" id="p-f1">
+
                           </div>
                           <label for="r-f1" class="text-center fw-bolder col-form-label">Role</label>
                           <div class="col-3 mx-auto">
@@ -307,6 +314,7 @@
                               <option value="ADMIN">ADMIN</option>
                               <option value="USER">USER</option>
                             </select>
+
                           </div>
                         </div>
                       <div class="text-center my-3">
@@ -360,9 +368,11 @@
                            <td th:text="${user.surName}"></td>
                            <td th:text="${user.age}"></td>
                            <td th:text="${user.email}"></td>
-                           <span th:each="userRole:${user?.getRoles()}">
-                           <td th:text="${userRole?.name()}"></td>
-                           </span>
+                           <td> <th:block th:each="role: ${user?.getRoles()}">
+                             <a th:text="${role.name()} "></a>
+                           </th:block>
+                           </td>
+
                          </tr>
                          </tbody>
                        </table>
@@ -382,7 +392,6 @@
 <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-
 
 </body>
 </html>

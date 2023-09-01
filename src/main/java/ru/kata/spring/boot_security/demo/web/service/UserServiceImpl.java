@@ -6,14 +6,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.kata.spring.boot_security.demo.web.dao.UserDaoImpl;
-import ru.kata.spring.boot_security.demo.web.exeptions.UserEmailException;
-import ru.kata.spring.boot_security.demo.web.exeptions.UserNotFoundException;
+import ru.kata.spring.boot_security.demo.web.exceptions.UserEmailException;
+import ru.kata.spring.boot_security.demo.web.exceptions.UserNotFoundException;
 import ru.kata.spring.boot_security.demo.web.model.User;
 
 import javax.validation.Valid;
@@ -26,7 +27,7 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
 
     private UserDaoImpl userDaoImp;
-
+    @Autowired
     public UserServiceImpl(UserDaoImpl userDaoImp) {
         this.userDaoImp = userDaoImp;
     }
@@ -37,7 +38,11 @@ public class UserServiceImpl implements UserService {
         if(!checkEmail(user)) {
             throw new UserEmailException(String.format("Пользователь с email %s уже существует, укажите другой email",user.getEmail()));
         }
-        return userDaoImp.add(user);
+        User newUser = new User(user.getName(),user.getSurName(),user.getAge(),user.getEmail(),
+                new BCryptPasswordEncoder().encode(user.getPassword()),user.getRoles());
+        newUser.setId(user.getId());
+
+        return userDaoImp.add(newUser);
     }
     @Transactional
     @Override
@@ -82,10 +87,10 @@ public class UserServiceImpl implements UserService {
     }
     @Transactional
     @Override
-    public void removeUser(long id) throws UserNotFoundException {
+    public boolean removeUser(long id) throws UserNotFoundException {
         Optional<User> user = Optional.ofNullable(userDaoImp.getUser(id));
         if (user.isPresent()) {
-            userDaoImp.removeUser(user.get());
+            return userDaoImp.removeUser(user.get());
         } else {
             throw new UserNotFoundException(String.format("Пользователь с таки id - %d не найден", id));
         }
@@ -114,7 +119,7 @@ public class UserServiceImpl implements UserService {
     }
 
     private void verificationPassword(User updateUser, User userFromDB) {
-        if (updateUser.getPassword().equals(userFromDB.getPassword())) {
+        if (updateUser.getPassword().equals("") || updateUser.getPassword().equals(userFromDB.getPassword())) {
             userFromDB.setPassword(userFromDB.getPassword());
             return;
         }
