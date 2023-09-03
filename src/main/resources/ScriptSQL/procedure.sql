@@ -1,25 +1,12 @@
-DELIMITER //
+#       Вставка в новосозданныую таблицу
 
-CREATE PROCEDURE create_users(
-             IN   id bigint,
-             IN   `age` int,
-<<<<<<< HEAD
-             IN  email  varchar(60),
-=======
->>>>>>> origin/main
-             IN  username  varchar(30),
-             IN  `password` varchar(255),
-             IN  sur_name varchar(30),
-             IN  roles varchar(30)
-)
-BEGIN
+INSERT INTO users VALUES (1, 11,'admin@a.ru', 'admin', '$2y$10$UUDoqynp3SsJuWxK6XMQnugF.zt929JjbdRT4N6yG0QUgcV7LKkVq', 'Sokolov');
+INSERT INTO users VALUES (2, 12, 'user@u.ru', 'user', '$2y$10$hDZIK07X9DFwEyDXd8u7VuaRSvF/TLffc9VHpGdcJTyMwFYNn7msC', 'Petrov');
+INSERT INTO user_role VALUES (1, 'ADMIN');
+INSERT INTO user_role VALUES (2, 'USER');
 
-<<<<<<< HEAD
-    REPLACE INTO users VALUES ( id,`age`, email, username, `password`, sur_name);
-=======
-    REPLACE INTO users VALUES ( id,`age`, username, `password`, sur_name);
->>>>>>> origin/main
-    REPLACE INTO user_role VALUES ( id, roles);
 
-END;
-DELIMITER ;
+#       Вставка в таблицу созданную в задании 3.1.3
+
+# REPLACE INTO users VALUES (1, 11,'admin', '$2y$10$UUDoqynp3SsJuWxK6XMQnugF.zt929JjbdRT4N6yG0QUgcV7LKkVq', 'Sokolov','admin@a.ru');
+# REPLACE INTO users VALUES (2, 12, 'user', '$2y$10$hDZIK07X9DFwEyDXd8u7VuaRSvF/TLffc9VHpGdcJTyMwFYNn7msC', 'Petrov','user@u.ru');
